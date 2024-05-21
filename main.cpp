@@ -1,5 +1,14 @@
 #include <iostream>
 
+void One();
+void Two();
+void Three();
+void Four();
+void Five();
+void Six();
+void Seven();
+
+
 int main()
 {
     printf("Hello, World!\n");
@@ -10,32 +19,75 @@ int main()
            "4 - Use files to loading the information \n"
            "5 - Print the current text to console \n"
            "6 - Insert the text by line and symbol index \n"
-           "7 - Search \n");
+           "7 - Search \n"
+           "8 - exit \n");
 
-    printf("Please, choose the command\n");
+
     int optionNumber;
     while (true) {
+        printf("Please, choose the command\n");
         scanf("%d",&optionNumber);
 
         switch (optionNumber) {
             case 1:
-                break;
+                One();
+            break;
             case 2:
-                break;
+                Two();
+            break;
             case 3:
-                break;
+                Three();
+            break;
             case 4:
-                break;
+                Four();
+            break;
             case 5:
-                break;
+                Five();
+            break;
             case 6:
-                break;
+                Six();
+            break;
             case 7:
-                break;
+                Seven();
+            break;
+            case 8:
+                return 0;
             default:
                 printf("The command is not implemented\n");
-            return 0;
         }
     }
     return 0;
+}
+
+
+void One() {
+    printf("Enter text to append: \n");
+    // взяти текст з консолі і додати його до файлу
+}
+
+void Two() {
+    printf("New line is started \n");
+
+}
+
+void Three() {
+    printf("Enter the file name for saving: \n");
+
+}
+
+void Four() {
+    printf("Enter the file name for loading: \n");
+
+}
+
+void Five() {
+    printf("Hello\n");
+}
+
+void Six() {
+    printf("Choose line and index to insert text: \n");
+}
+
+void Seven() {
+    printf("Enter the text to search: \n");
 }
