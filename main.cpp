@@ -81,7 +81,9 @@ void One() {
 
 void Two() {
     printf("New line is started \n");
-
+    techFile = fopen("file.txt", "a");
+    fprintf(techFile, "\n");
+    fclose(techFile);
 }
 
 void Three() {
