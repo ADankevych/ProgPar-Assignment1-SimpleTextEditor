@@ -8,10 +8,14 @@ void Five();
 void Six();
 void Seven();
 
+FILE *techFile;
 
 int main()
 {
     printf("Hello, World!\n");
+
+    techFile = fopen("file.txt", "w");
+    fclose(techFile);
 
     printf("1 - Append text symbols to the end \n"
            "2 - Start the new line \n"
@@ -31,25 +35,25 @@ int main()
         switch (optionNumber) {
             case 1:
                 One();
-            break;
+                break;
             case 2:
                 Two();
-            break;
+                break;
             case 3:
                 Three();
-            break;
+                break;
             case 4:
                 Four();
-            break;
+                break;
             case 5:
                 Five();
-            break;
+                break;
             case 6:
                 Six();
-            break;
+                break;
             case 7:
                 Seven();
-            break;
+                break;
             case 8:
                 return 0;
             default:
@@ -62,7 +66,17 @@ int main()
 
 void One() {
     printf("Enter text to append: \n");
-    // взяти текст з консолі і додати його до файлу
+    techFile = fopen("file.txt", "a");
+    char userInput;
+    getchar();
+    while(true) {
+        userInput = getchar();
+        if (userInput == '\n') {
+            break;
+        }
+        fprintf(techFile, "%c", userInput);
+    }
+    fclose(techFile);
 }
 
 void Two() {
