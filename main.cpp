@@ -97,7 +97,13 @@ void Four() {
 }
 
 void Five() {
-    printf("Hello\n");
+    techFile = fopen("file.txt", "r");
+    char c;
+    while ((c = getc(techFile)) != EOF) {
+        printf("%c", c);
+    }
+    printf("\n");
+    fclose(techFile);
 }
 
 void Six() {
