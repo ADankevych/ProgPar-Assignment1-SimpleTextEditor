@@ -60,6 +60,7 @@ int main()
                 return 0;
             default:
                 printf("The command is not implemented\n");
+                break;
         }
     }
     return 0;
