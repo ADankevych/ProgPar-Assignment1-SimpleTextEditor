@@ -9,6 +9,7 @@ void Six();
 void Seven();
 
 FILE *techFile;
+FILE *savingFile;
 
 int main()
 {
@@ -87,8 +88,25 @@ void Two() {
 }
 
 void Three() {
-    printf("Enter the file name for saving: \n");
+    printf("Enter the file name for saving (not more 20 symbols): \n");
+    char filePath[21];
+    scanf("%20s", filePath);
 
+    savingFile = fopen(filePath, "a");
+    techFile = fopen("file.txt", "r");
+    char symbol;
+    while (true) {
+        symbol = fgetc(techFile);
+        if (symbol == EOF) {
+            break;
+        }
+        fputc(symbol, savingFile);
+    }
+    fclose(savingFile);
+    fclose(techFile);
+
+    techFile = fopen("file.txt", "w"); // просто очистити файл
+    fclose(techFile);
 }
 
 void Four() {
