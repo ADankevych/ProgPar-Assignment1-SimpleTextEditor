@@ -141,6 +141,75 @@ void Five() {
 
 void Six() {
     printf("Choose line and index to insert text: \n");
+    int line;
+    int index;
+    scanf("%d %d", &line, &index);
+    getchar();
+
+    techFile = fopen("file.txt", "r");
+    long fileSize = 0;
+    char symbol;
+    while ((symbol = fgetc(techFile)) != EOF) {
+        fileSize++;
+    }
+    fclose(techFile);
+
+    char *fileContent = (char *) malloc((fileSize+1) * sizeof(char));
+    techFile = fopen("file.txt", "r");
+    fread(fileContent, 1, fileSize, techFile);
+    fileContent[fileSize] = '\0';
+    fclose(techFile);
+
+    int lineCounter = 0;
+    int indexCounter = 0;
+    int counter1 = 0;
+    while (fileContent[counter1] != '\0') {
+        if (lineCounter == line && indexCounter == index) {
+            break;
+        }
+        if (fileContent[counter1] == '\n') {
+            lineCounter++;
+            indexCounter = 0;
+        } else {
+            indexCounter++;
+        }
+        counter1++;
+    }
+
+    printf("Enter the text to insert: \n");
+    char *userInput = (char *) malloc(100 * sizeof(char));
+    fgets(userInput, 100, stdin);
+    int userInputSize = strlen(userInput);
+
+    if (userInput[userInputSize - 1] == '\n') {  // треба бо вставе \n після вводу
+        userInput[userInputSize - 1] = '\0';
+        userInputSize--;
+    }
+
+    int newFileSize = fileSize + userInputSize;
+    char *newFileContent = (char *)malloc((newFileSize + 1) * sizeof(char));
+    int counter2 = 0;
+    for (int i = 0; i < counter1; i++) {
+        newFileContent[counter2] = fileContent[i];
+        counter2++;
+    }
+    for (int i = 0; i < userInputSize; i++) {
+        newFileContent[counter2] = userInput[i];
+        counter2++;
+    }
+    for (int i = counter1; i < fileSize; i++) {
+        newFileContent[counter2] = fileContent[i];
+        counter2++;
+    }
+    newFileContent[newFileSize] = '\0';
+
+    techFile = fopen("file.txt", "w");
+    fputs(newFileContent, techFile);
+    fclose(techFile);
+
+    free(fileContent);
+    free(userInput);
+    free(newFileContent);
 }
 
 void Seven() {
