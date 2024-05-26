@@ -10,6 +10,7 @@ void Seven();
 
 FILE *techFile;
 FILE *savingFile;
+FILE *loadingFile;
 
 int main()
 {
@@ -111,7 +112,20 @@ void Three() {
 
 void Four() {
     printf("Enter the file name for loading: \n");
-
+    char filePath[21];
+    scanf("%20s", filePath);
+    techFile = fopen("file.txt", "a");
+    loadingFile = fopen(filePath, "r");
+    char symbol;
+    while (true) {
+        symbol = fgetc(loadingFile);
+        if (symbol == EOF) {
+            break;
+        }
+        fputc(symbol, techFile);
+    }
+    fclose(loadingFile);
+    fclose(techFile);
 }
 
 void Five() {
