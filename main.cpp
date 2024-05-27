@@ -214,4 +214,45 @@ void Six() {
 
 void Seven() {
     printf("Enter the text to search: \n");
+    getchar();
+    char *searchText = (char *) malloc(100 * sizeof(char));
+    fgets(searchText, 100, stdin);
+    int lenInput = strlen(searchText);
+    if (searchText[lenInput - 1] == '\n') {
+        searchText[lenInput - 1] = '\0';
+        lenInput--;
+    }
+
+    techFile = fopen("file.txt", "r");
+    long fileSize = 0;
+    char symbol;
+    while ((symbol = fgetc(techFile)) != EOF) {
+        fileSize++;
+    }
+    fclose(techFile);
+
+    techFile = fopen("file.txt", "r");
+    char *fileContent = (char *) malloc((fileSize + 1) * sizeof(char));
+
+    fread(fileContent, 1, fileSize, techFile);
+    fileContent[fileSize] = '\0';
+
+    char *lineBuffer = (char *) malloc(100 * sizeof(char));
+    int lineNumber = 0;
+
+    char *pos = strstr(fileContent, searchText);
+    if (pos != NULL) {
+        int index = pos - fileContent;
+        for (int i = 0; i < index; i++) {
+            if (fileContent[i] == '\n') {
+                lineNumber++;
+            }
+        }
+        printf("%d %d\n", lineNumber + 1, index);
+    }
+
+    free(searchText);
+    free(fileContent);
+    free(lineBuffer);
+    fclose(techFile);
 }
